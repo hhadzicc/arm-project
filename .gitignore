@@ -1,0 +1,45 @@
+# Terraform cache / build
+.terraform/
+.terraform.lock.hcl
+
+# Terraform state
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.backup
+
+# Terraform plan/output fajlovi
+*.tfplan
+*.plan
+crash.log
+crash.*.log
+
+# Terraform override lokalni fajlovi
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Cache / build generalno
+build/
+dist/
+out/
+target/
+tmp/
+.tmp/
+.cache/
+
+# Logs
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node/Python ako bude aplikacije lokalno
+node_modules/
+__pycache__/
+*.pyc
