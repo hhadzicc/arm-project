@@ -1,8 +1,21 @@
 #!/bin/bash
 set -eux
 
-apt-get update -y
-apt-get install -y apache2 docker.io git curl unzip openssl
+export DEBIAN_FRONTEND=noninteractive
+
+cat >/etc/apt/apt.conf.d/99force-ipv4 <<EOF
+Acquire::ForceIPv4 "true";
+EOF
+
+for i in {1..10}; do
+  apt-get update -y && break
+  sleep 15
+done
+
+for i in {1..10}; do
+  apt-get install -y apache2 docker.io git curl unzip openssl && break
+  sleep 15
+done
 
 systemctl enable apache2
 systemctl start apache2
@@ -24,7 +37,7 @@ cat > /var/www/www/index.html <<HTML
 <body>
     <h1>ARM projekat - AWS web instanca radi</h1>
     <p>Domena: ${domain_name}</p>
-    <p>Ovo je privremena stranica. Kasnije ovdje ide aplikacija iz Web tehnologija.</p>
+    <p>Ovo je privremena stranica. Deployment aplikacije ide preko GitHub runner-a ili rucno preko SSH-a.</p>
 </body>
 </html>
 HTML
@@ -56,3 +69,6 @@ a2enmod proxy
 a2enmod proxy_http
 
 systemctl reload apache2
+
+systemctl is-active --quiet apache2
+systemctl is-active --quiet docker
