@@ -37,6 +37,11 @@ resource "aws_instance" "web" {
     Project = var.project_name
     Role    = "web"
   }
+
+  depends_on = [
+    aws_route_table_association.public,
+    aws_internet_gateway.main
+  ]
 }
 
 resource "aws_instance" "db" {
@@ -67,4 +72,9 @@ resource "aws_instance" "db" {
     Project = var.project_name
     Role    = "database"
   }
+
+  depends_on = [
+    aws_route_table_association.private,
+    aws_nat_gateway.main
+  ]
 }

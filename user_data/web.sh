@@ -2,7 +2,7 @@
 set -eux
 
 apt-get update -y
-apt-get install -y apache2 docker.io docker-compose-plugin git curl unzip openssl
+apt-get install -y apache2 docker.io git curl unzip openssl
 
 systemctl enable apache2
 systemctl start apache2
@@ -42,8 +42,8 @@ cat > /etc/apache2/sites-available/www.conf <<CONF
         Require all granted
     </Directory>
 
-    ErrorLog \${APACHE_LOG_DIR}/arm_error.log
-    CustomLog \${APACHE_LOG_DIR}/arm_access.log combined
+    ErrorLog \$${APACHE_LOG_DIR}/arm_error.log
+    CustomLog \$${APACHE_LOG_DIR}/arm_access.log combined
 </VirtualHost>
 CONF
 

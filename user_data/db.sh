@@ -2,7 +2,7 @@
 set -eux
 
 apt-get update -y
-apt-get install -y docker.io docker-compose-plugin curl
+apt-get install -y docker.io curl
 
 systemctl enable docker
 systemctl start docker

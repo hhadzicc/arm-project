@@ -54,6 +54,14 @@ resource "aws_security_group" "db" {
     security_groups = [aws_security_group.web.id]
   }
 
+  ingress {
+    description     = "SSH pristup na DB samo preko web EC2 instance"
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
+    security_groups = [aws_security_group.web.id]
+  }
+
   egress {
     description = "Sav odlazni saobracaj"
     from_port   = 0
